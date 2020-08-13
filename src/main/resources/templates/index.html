@@ -12,13 +12,18 @@ xmlns:th="http://www.thymeleaf.org">
     <app></app>
 
     <script th:src="@{/js/app.riot}" type="riot"></script>
-    <script th:src="@{/js/components/acd-menu.riot}" type="riot"></script>
+    <script th:src="@{/js/components/app-footer.riot}" type="riot"></script>
+    <script th:src="@{/js/components/app-hero.riot}" type="riot"></script>
+    <script th:src="@{/js/components/app-links.riot}" type="riot"></script>
+    <script th:src="@{/js/components/app-menu.riot}" type="riot"></script>
+    <script th:src="@{/js/components/ring.riot}" type="riot"></script>
     <script>
         riot
             .compile()
             .then(() => {
                 riot.mount('app', {
-                    title: 'Hello Riot.js!'
+                    heroTitle: 'Riot.js Tutorial',
+                    footerText: 'Made by kkeeth'
                 })
             })
     </script>

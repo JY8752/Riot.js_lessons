@@ -39,3 +39,9 @@ app .logo {
     padding: 10px;
     visibility: visible;
 }
+
+body {
+    margin: 0;
+    text-align: center;
+    font-family: Josefin-sans, Consolas, monospace;
+}
