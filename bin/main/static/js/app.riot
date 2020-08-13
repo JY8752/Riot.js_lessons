@@ -2,29 +2,28 @@
     <div class="app-header">
         <img src="https://riot.js.org/img/logo/riot-logo.svg" alt="Riot.js logo" class="logo">
     </div>
-    <ul>
-        <li>ランダム関数: {Math.random()}</li>
-        <li>未定義チェック: {value || 'Undefined'}</li>
-        <li>関数の実行: (コンソールを確認)</li>
-        <li>三項演算子: {title}</li>
-    </ul>
-    <hr>
-    <button onclick={toggle}>click</button>
-    <p if={ login }>Logged In</p>
-    <p if={ !login }>Log Out</p>
+    <h1>Language-Frameworks</h1>
+    <acd-menu name="JavaScript" items={javascript}/>
+    <acd-menu name="Node.js" items={nodejs}/>
+    <p>Click each menus</p>
 
     <script>
         export default {
-            login: false,
-            onBeforeMount(props) {
-                (() => console.log(props.title))()
-                this.title = props.title.length > 140
-                    ? 'Message is too long!'
-                    : 'Good!!'
-            },
-            toggle() {
-                this.login = !this.login
-                this.update()
+            onBeforeMount(props, state) {
+                this.javascript = [
+                    'Riot.js',
+                    'React.js',
+                    'Vue.js',
+                    'Angular',
+                    'Ionic'
+                ]
+                this.nodejs = [
+                    'Express',
+                    'Koa',
+                    'Fastify',
+                    'Sails',
+                    'Hapi'
+                ]
             }
         }
     </script>

@@ -8,3 +8,34 @@ app .logo {
     height: 36px;
     margin-bottom: 5px;
 }
+
+.acd-check {
+    display: none;
+}
+
+.acd-label {
+    background: #777;
+    color: #fff;
+    display: block;
+    margin-bottom: 1px;
+    padding: 10px;
+}
+
+.acd-content {
+    display: flex;
+    align-items: center;
+    height: 0;
+    opacity: 0;
+    padding: 0 10px;
+    transition: .5s;
+    visibility: hidden;
+}
+
+.acd-check:checked + .acd-label + .acd-content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    opacity: 1;
+    padding: 10px;
+    visibility: visible;
+}

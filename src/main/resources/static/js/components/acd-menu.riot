@@ -1,0 +1,9 @@
+<acd-menu>
+    <input id='acd-check-${props.name}' class="acd-check" type="checkbox">
+    <label class="acd-label" for='acd-check-${props.name}'>Click: { props.name }</label>
+    <div class="acd-content">
+        <ul>
+            <li each={item in props.items}>{ item}</li>
+        </ul>
+    </div>
+</acd-menu>
