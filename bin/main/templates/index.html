@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script type="text/javascript" src="https://unpkg.com/riot@4/riot+compiler.min.js"></script>
+    <title>Riot</title>
+</head>
+<body>
+    <app></app>
+
+    <script th:src="@{/js/app.riot}" type="riot"></script>
+    <script>
+        riot
+            .compile()
+            .then(() => {
+                riot.mount('app', {
+                    title: 'Hello Riot.js!'
+                })
+            })
+    </script>
+    
+</body>
+</html>
