@@ -3,4 +3,18 @@
         <img src="https://riot.js.org/img/logo/riot-logo.svg" alt="Riot.js logo" class="logo">
     </div>
     <h1>{ props.title }</h1>
+    <h2>{ props.title }</h2>
+    <h2>{ state.title }</h2>
+
+    <script>
+        export default {
+            onBeforeMount(props, state) {
+                state.title = 'Updated!'
+            },
+            onMounted(props, state) {
+                console.log(this.$('h1'))
+                console.log(this.$$('h2'))
+            }
+        }
+    </script>
 </app>
