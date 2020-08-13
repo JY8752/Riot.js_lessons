@@ -2,18 +2,29 @@
     <div class="app-header">
         <img src="https://riot.js.org/img/logo/riot-logo.svg" alt="Riot.js logo" class="logo">
     </div>
-    <h1>{ props.title }</h1>
-    <h2>{ props.title }</h2>
-    <h2>{ state.title }</h2>
+    <ul>
+        <li>ランダム関数: {Math.random()}</li>
+        <li>未定義チェック: {value || 'Undefined'}</li>
+        <li>関数の実行: (コンソールを確認)</li>
+        <li>三項演算子: {title}</li>
+    </ul>
+    <hr>
+    <button onclick={toggle}>click</button>
+    <p if={ login }>Logged In</p>
+    <p if={ !login }>Log Out</p>
 
     <script>
         export default {
-            onBeforeMount(props, state) {
-                state.title = 'Updated!'
+            login: false,
+            onBeforeMount(props) {
+                (() => console.log(props.title))()
+                this.title = props.title.length > 140
+                    ? 'Message is too long!'
+                    : 'Good!!'
             },
-            onMounted(props, state) {
-                console.log(this.$('h1'))
-                console.log(this.$$('h2'))
+            toggle() {
+                this.login = !this.login
+                this.update()
             }
         }
     </script>
