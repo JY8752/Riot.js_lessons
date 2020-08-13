@@ -11,3 +11,17 @@
 - マウントのハンドリング
     - ifディレクティブを使い、表示/非表示をハンドリングできる。
     - 不要なラッパータグを増やさないため<template>があり、マウント時には削除される。
+- ループ
+    - <li each={ item in items }>{ item }</li>
+    → items配列をループ表示。*nameは予約語のため使用できないので注意！
+    →データ型、オブジェクトもループ可能。
+    - <li each={ (item, index) in items}>{ index } : { item }</li>
+    →インデックスも表示可能
+    - オブジェクトのループ
+        - Objectオブジェクトのentriesメソッド
+        →<p each={ item in Object.entries(items) }>
+                key: { item[0] } - value: { item[1] }
+            </p>
+        →entriesメソッドは[key, value]を格納した配列に変換している！
+    - キー属性
+        - ループするコレクションが不変の場合、キー属性を設定することでパフォーマンスが大幅に向上する。
