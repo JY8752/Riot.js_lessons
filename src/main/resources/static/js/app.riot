@@ -1,22 +1,11 @@
 <app>
-    <app-menu items={ menus }/>
-    <app-hero title={ props.heroTitle }/>
-    <app-links items={ urls } />
-    <app-footer text={ props.footerText}/>
+    <div class="app-header">
+        <img src="https://riot.js.org/img/logo/riot-logo.svg" alt="Riot.js logo" class="logo">
+    </div>
+    <h1>{ props.title }</h1>
 
     <script>
         export default {
-            menus: [
-                { title: 'menu1', url: '#' },
-                { title: 'menu2', url: '#' },
-                { title: 'menu3', url: '#' },
-            ],
-            urls: [
-                { title: 'GitHub', url: '#'},
-                { title: 'Twitter', url: '#'},
-                { title: 'Facebook', url: '#'},
-
-            ]
         }
     </script>
 </app>
