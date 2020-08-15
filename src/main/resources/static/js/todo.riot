@@ -5,18 +5,7 @@
     <div id="container">
         <h1>{ props.title }</h1>
 
-        <form onsubmit={ addTodo }>
-            <input name="todo" value="" oninput={ input } placeholder="please input task" />
-            <button disabled={ !state.isInput }>
-                ADD #{ state.todoList.length + 1 }
-            </button>
-            <button
-                class="danger"
-                onclick={ deleteDoneTodos }
-            >
-                delete done
-            </button>
-        </form>
+        <todo-form state={ state } checkDoneTodo={ checkDoneTodo }/>
 
         <h4>todo list</h4>
         <ul>
@@ -42,50 +31,30 @@
             state: {
                 todoList: [],
                 nextId: 0,
-                isInput: false
+                hasDoneTodo: true
             },
             onBeforeMount(props, state) {
                 state.nextId = props.nextId
                 state.todoList = props.todoList
-            },
-            addTodo(e) {
-                e.preventDefault()
-                if(e.target.todo.value) {
-                    this.update({
-                        todoList: [
-                            ...this.state.todoList,
-                            {
-                                id: this.state.nextId + 1,
-                                title: e.target.todo.value,
-                                done: false
-                            }
-                        ],
-                        nextId: this.state.nextId + 1,
-                        isInput: false
-                    })
-                    e.target.todo.value = ""
-                }
-            },
-            input(e) {
-                this.update({
-                    isInput: e.target.value
-                })
+                state.hasDoneTodo = this.checkDoneTodo()
             },
             toggle(todo) {
                 todo.done = !todo.done
-                this.update()
+                this.update({
+                    hasDoneTodo: this.checkDoneTodo()
+                })
+            },
+            checkDoneTodo(updatedTodoList) {
+                const todoList = updatedTodoList || this.state.todoList
+                return todoList.some(item => item.done === true)
             },
             deleteTodo(todo) {
                 if(window.confirm('本当に削除してもよろしいですか？')) {
+                    const updatedTodoList
+                        = this.state.todoList.filter(item => item.id !== todo.id)
                     this.update({
-                        todoList: this.state.todoList.filter(item => item.id !== todo.id)
-                    })
-                }
-            },
-            deleteDoneTodos() {
-                if(window.confirm('本当に全てのtodoを削除してもよろしいですか？')) {
-                    this.update({
-                        todoList: this.state.todoList.filter(item => item.done !== true)
+                        hasDoneTodo: this.checkDoneTodo(updatedTodoList),
+                        todoList: updatedTodoList
                     })
                 }
             }

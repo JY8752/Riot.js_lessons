@@ -1,0 +1,62 @@
+<todo-form>
+    <form onsubmit={ addTodo }>
+        <input name="todo" value="" oninput={ input } placeholder="please input task" />
+        <button disabled={ !state.isInput }>
+            ADD #{ state.todoList.length + 1 }
+        </button>
+        <button
+            class="danger"
+            disabled={ !state.hasDoneTodo }
+            onclick={ deleteDoneTodos }
+        >
+            delete done
+        </button>
+    </form>
+    <script>
+        export default {
+            onBeforeMount(props, state) {
+                this.state = props.state
+            },
+            addTodo(e) {
+                e.preventDefault()
+                if(e.target.todo.value) {
+                    const updatedTodoList = [
+                        ...this.state.todoList,
+                        {
+                            id: this.state.nextId + 1,
+                            ...newTask
+                        }
+                    ]
+                    this.update({
+                        hasDoneTodo: this.checkDoneTodo(updatedTodoList),
+                        todoList: updatedTodoList,
+                        nextId: this.state.nextId + 1,
+                        isInput: false
+                    })
+                    e.target.todo.value = ""
+                }
+            },
+            input(e) {
+                this.update({
+                    isInput: e.target.value
+                })
+            },
+            deleteDoneTodos() {
+                if(window.confirm('本当に全てのtodoを削除してもよろしいですか？')) {
+                    this.update({
+                        hasDoneTodo: false,
+                        todoList: this.state.todoList.filter(item => item.done !== true)
+                    })
+                }
+            }
+        }
+    </script>
+    <style>
+        form input {
+            font-size: 85%;
+            padding: .4em;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+        }
+    </style>
+</todo-form>
