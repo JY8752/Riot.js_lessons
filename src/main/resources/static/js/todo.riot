@@ -10,16 +10,31 @@
             <button disabled={ !state.isInput }>
                 ADD #{ state.todoList.length + 1 }
             </button>
+            <button
+                class="danger"
+                onclick={ deleteDoneTodos }
+            >
+                delete done
+            </button>
         </form>
 
         <h4>todo list</h4>
         <ul>
             <li each={ todo in state.todoList } key={ todo.id }>
                 <label class={ todo.done ? 'completed' : null }>
+                    <input 
+                        type="checkbox"
+                        checked={ todo.done }
+                        onclick={ () => toggle(todo)}
+                    />
                     { todo.title}
                 </label>
+                <button class="danger" onclick={ () => deleteTodo(todo)}>
+                    delete
+                </button>
             </li>
         </ul>
+        <p if={ state.todoList.length === 0 }>No todos</p>
     </div>
 
     <script>
@@ -55,6 +70,24 @@
                 this.update({
                     isInput: e.target.value
                 })
+            },
+            toggle(todo) {
+                todo.done = !todo.done
+                this.update()
+            },
+            deleteTodo(todo) {
+                if(window.confirm('本当に削除してもよろしいですか？')) {
+                    this.update({
+                        todoList: this.state.todoList.filter(item => item.id !== todo.id)
+                    })
+                }
+            },
+            deleteDoneTodos() {
+                if(window.confirm('本当に全てのtodoを削除してもよろしいですか？')) {
+                    this.update({
+                        todoList: this.state.todoList.filter(item => item.done !== true)
+                    })
+                }
             }
         }
     </script>
