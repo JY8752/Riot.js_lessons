@@ -40,7 +40,19 @@
         - observable()でインスタンスを作成
         - on(イベント名, コールバック関数)でイベントを受信する
         - trigger(イベント名, 値)でイベントを送信する
-        
+- データの永続化
+    - 永続化の方法
+        ①DBを使う
+        ②firestoreを使う
+        ③webストレージを使う
+    - webストレージ
+        ①localStorage
+        ②sessionStorage
+    - localStorage
+        - window.localStorageで使用可能
+        - ストレージに保存するのはオブジェクトも可能だが、文字列のみ
+        →JSON.stringify(), JSON.parse()を使用して変換
+
 
 
 

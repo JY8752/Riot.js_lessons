@@ -5,25 +5,16 @@
     <div id="container">
         <h1>{ props.title }</h1>
 
-        <todo-form state={ state } checkDoneTodo={ checkDoneTodo }/>
+        <todo-form 
+            hasDoneTodo={ state.hasDoneTodo }
+            observable={ obs }
+            nextId={ state.nextId }
+        />
 
-        <h4>todo list</h4>
-        <ul>
-            <li each={ todo in state.todoList } key={ todo.id }>
-                <label class={ todo.done ? 'completed' : null }>
-                    <input 
-                        type="checkbox"
-                        checked={ todo.done }
-                        onclick={ () => toggle(todo)}
-                    />
-                    { todo.title}
-                </label>
-                <button class="danger" onclick={ () => deleteTodo(todo)}>
-                    delete
-                </button>
-            </li>
-        </ul>
-        <p if={ state.todoList.length === 0 }>No todos</p>
+        <todo-list 
+            todoList={ state.todoList }
+            observable={ obs }
+        />
     </div>
 
     <script>
@@ -34,29 +25,58 @@
                 hasDoneTodo: true
             },
             onBeforeMount(props, state) {
-                state.nextId = props.nextId
-                state.todoList = props.todoList
-                state.hasDoneTodo = this.checkDoneTodo()
+                const beforeTodoState = JSON.parse(localStorage.getItem('todo state'))
+                if(beforeTodoState !== null) {
+                    state.nextId = beforeTodoState.nextId
+                    state.todoList = beforeTodoState.todoList
+                    state.hasDoneTodo = beforeTodoState.hasDoneTodo
+                } else {
+                    state.nextId = props.nextId
+                    state.todoList = props.todoList
+                    state.hasDoneTodo = this.checkDoneTodo()
+                }
+                this.obs = observable(this)
             },
-            toggle(todo) {
-                todo.done = !todo.done
-                this.update({
-                    hasDoneTodo: this.checkDoneTodo()
+            onMounted() {
+                this.on('add todo', (newTask) => {
+                    const updatedTodoList = [
+                        ...this.state.todoList,
+                        {
+                            id: this.state.nextId + 1,
+                            ...newTask
+                        }
+                    ]
+                    this.update({
+                        todoList: updatedTodoList,
+                        nextId: this.state.nextId + 1,
+                        hasDoneTodo: this.checkDoneTodo(updatedTodoList)
+                    })
                 })
+                this.on('delete done todos', () => {
+                    this.update({
+                        hasDoneTodo: false,
+                        todoList: this.state.todoList.filter(item => item.done !== true)
+                    })
+                })
+                this.on('delete todo', (filteredTodoList) => {
+                    this.update({
+                        hasDoneTodo: this.checkDoneTodo(filteredTodoList),
+                        todoList: filteredTodoList
+                    })
+                })
+                this.on('toggle todo', (updatedList) => {
+                    this.update({
+                        hasDoneTodo: this.checkDoneTodo(updatedList),
+                        todoList: updatedList
+                    })
+                })
+            },
+            onUpdated(props, state) {
+                localStorage.setItem('todo state', JSON.stringify(state))
             },
             checkDoneTodo(updatedTodoList) {
                 const todoList = updatedTodoList || this.state.todoList
                 return todoList.some(item => item.done === true)
-            },
-            deleteTodo(todo) {
-                if(window.confirm('本当に削除してもよろしいですか？')) {
-                    const updatedTodoList
-                        = this.state.todoList.filter(item => item.id !== todo.id)
-                    this.update({
-                        hasDoneTodo: this.checkDoneTodo(updatedTodoList),
-                        todoList: updatedTodoList
-                    })
-                }
             }
         }
     </script>

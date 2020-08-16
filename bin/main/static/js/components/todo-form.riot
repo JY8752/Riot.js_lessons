@@ -1,12 +1,12 @@
 <todo-form>
     <form onsubmit={ addTodo }>
         <input name="todo" value="" oninput={ input } placeholder="please input task" />
-        <button disabled={ !state.isInput }>
-            ADD #{ state.todoList.length + 1 }
+        <button disabled={ !isInput }>
+            ADD #{ props.nextId }
         </button>
         <button
             class="danger"
-            disabled={ !state.hasDoneTodo }
+            disabled={ !props.hasDoneTodo }
             onclick={ deleteDoneTodos }
         >
             delete done
@@ -14,39 +14,24 @@
     </form>
     <script>
         export default {
-            onBeforeMount(props, state) {
-                this.state = props.state
-            },
             addTodo(e) {
                 e.preventDefault()
                 if(e.target.todo.value) {
-                    const updatedTodoList = [
-                        ...this.state.todoList,
-                        {
-                            id: this.state.nextId + 1,
-                            ...newTask
-                        }
-                    ]
-                    this.update({
-                        hasDoneTodo: this.checkDoneTodo(updatedTodoList),
-                        todoList: updatedTodoList,
-                        nextId: this.state.nextId + 1,
-                        isInput: false
+                    this.isInput = false
+                    this.props.observable.trigger('add todo', {
+                        title: e.target.todo.value,
+                        done: false
                     })
                     e.target.todo.value = ""
                 }
             },
             input(e) {
-                this.update({
-                    isInput: e.target.value
-                })
+                this.isInput = e.target.value
+                this.update()
             },
             deleteDoneTodos() {
                 if(window.confirm('本当に全てのtodoを削除してもよろしいですか？')) {
-                    this.update({
-                        hasDoneTodo: false,
-                        todoList: this.state.todoList.filter(item => item.done !== true)
-                    })
+                    this.props.observable.trigger('delete done todos')
                 }
             }
         }
