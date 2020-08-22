@@ -5,39 +5,10 @@ xmlns:th="http://www.thymeleaf.org">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <script type="text/javascript" src="https://unpkg.com/riot@4/riot+compiler.min.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/@riotjs/observable@4.0.4/dist/observable.js"></script>
     <title>Riot</title>
 </head>
 <body>
-    <todo></todo>
-
-    <script th:src="@{/js/todo.riot}" type="riot"></script>
-    <script th:src="@{/js/components/todo-form.riot}" type="riot"></script>
-    <script th:src="@{/js/components/todo-list.riot}" type="riot"></script>
-    <!-- <script th:src="@{/js/components/app-footer.riot}" type="riot"></script>
-    <script th:src="@{/js/components/app-hero.riot}" type="riot"></script>
-    <script th:src="@{/js/components/app-links.riot}" type="riot"></script>
-    <script th:src="@{/js/components/app-menu.riot}" type="riot"></script>
-    <script th:src="@{/js/components/ring.riot}" type="riot"></script>
-    <script th:src="@{/js/components/child.riot}" type="riot"></script>
-    <script th:src="@{/js/components/button-a.riot}" type="riot"></script>
-    <script th:src="@{/js/components/button-b.riot}" type="riot"></script> -->
-    <script>
-        riot
-            .compile()
-            .then(() => {
-                riot.mount('todo', {
-                    title: 'TODO App',
-                    todoList: [
-                        { id: 1, title: 'task1', done: false },
-                        { id: 2, title: 'task2', done: true },
-                        { id: 3, title: 'task3', done: false }
-                    ],
-                    nextId: 4
-                })
-            })
-    </script>
-    
+    <div id="app"/>
+    <script th:src="@{/js/output/main.js}" src="../static/js/main.js"></script>
 </body>
 </html>

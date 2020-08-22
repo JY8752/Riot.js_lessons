@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "parcel": "parcel build src/main/js/main.js -d src/main/resources/static/js/output"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,13 @@
   },
   "homepage": "https://github.com/JY8752/Riot.js_lessons#readme",
   "devDependencies": {
+    "@riotjs/hot-reload": "^4.0.1",
+    "@riotjs/parcel-plugin-riot": "^4.0.1",
     "eslint": "^7.7.0",
-    "eslint-plugin-riot": "^0.1.8"
+    "eslint-plugin-riot": "^0.1.8",
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "riot": "^4.13.5"
   }
 }

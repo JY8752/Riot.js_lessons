@@ -18,6 +18,8 @@ repositories {
 	mavenCentral()
 }
 
+task parcel(dependsOn: ['npm_run_webpack'])
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
