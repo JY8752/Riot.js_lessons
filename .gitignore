@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 node_modules/
 .cache
+.env
 
 ### STS ###
 .apt_generated
