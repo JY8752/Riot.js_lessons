@@ -1,7 +1,8 @@
 import '@riotjs/hot-reload'
-import App from './app2.riot'
 import { component } from 'riot'
+import 'semantic-ui-riot'
+import App from './app3.riot'
 
 component(App)(document.getElementById('app'), {
-    title: 'Riot.js with Anime.js!'
+    title: 'Semantic UI Riot Demo'
 })
