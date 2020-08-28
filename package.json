@@ -30,15 +30,13 @@
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
+    "@riotjs/compiler": "^4.10.1",
     "@riotjs/observable": "^4.0.4",
     "animejs": "^3.2.0",
     "axios": "^0.20.0",
     "dotenv": "^8.2.0",
     "ress": "^3.0.0",
     "riot": "4.11.0",
-    "semantic-ui-riot": "^1.2.0"
-  },
-  "resolutions": {
-    "riot": "4.11.0"
+    "semantic-ui-riot": "^2.2.4"
   }
 }
