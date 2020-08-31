@@ -1,0 +1,21 @@
+<rmd-button>
+    <button {...attributes }>
+        <span if={ isRipple } class="mdc-button__ripple"></span>
+        <slot/>
+    </button>
+
+    <script>
+        export default {
+            attributes: {},
+            onBeforeMount(props) {
+                this.isRipple = props.ripple ? props.ripple : false
+                this.attributes.class = `
+                    ${props.raised ? "mdc-button--raised" : ""}
+                    ${props.outlined ? "mdc-button--outlined" : ""}
+                    ${props.unelevated ? "mdc-button--unelevated" : ""}
+                    mdc-button
+                `
+            }
+        }
+    </script>
+</rmd-button>

@@ -1,0 +1,57 @@
+<app10>
+    <div class="header-left">
+            <img src="https://riot.js.org/img/logo/square.svg" alt="Riot.js logo" class="logo">
+    </div>
+    <div class="header-right">
+        <h1>{ props.title }</h1>
+    </div>
+    <p>◯ Base Buttons</p>
+    <Rmd ripple={ true }>
+        Button
+    </Rmd>
+
+    <Rmd ripple={ true } raised={ true }>
+        Button
+    </Rmd>
+    <Rmd ripple={ true } outlined={ true }>
+        Button
+    </Rmd>
+    <Rmd ripple={ true } unelevated={ true }>
+        Button
+    </Rmd>
+
+    <hr/>
+
+    <p>◯ Various Buttons</p>
+    <button class="mdc-button mdc-button--outlined">
+        <div class="mdc-button__ripple"></div>
+        <i class="material-icons material-icon-button__icon">favorite</i>Button
+    </button>
+    <button class="mdc-button mdc-button--raised" onclick={ handleToggle }>
+        <i if={ isLinked } class="material-icons material-icon-button__icon">favorite</i>
+        <i if={ !isLinked } class="material-icons material-icon-button__icon">favorite_border</i>
+    </button>
+    <button class="mdc-button mdc-button--raised" disabled>
+        <div class="mdc-button__ripple"></div>
+        Button
+    </button>
+    <button class="mdc-fab mdc-button--raised">
+        <div class="mdc-button__ripple"></div>
+        <i class="material-icons material-icon-button__icon">add</i>
+    </button>
+    <script>
+        import Rmd from './components/rmd-button.riot'
+        export default {
+            components: {
+                Rmd
+            },
+            isLinked: false,
+            onBeforeMount(props, state) {
+            },
+            handleToggle() {
+                this.isLinked = !this.isLinked
+                this.update()
+            }
+        }
+    </script>
+</app10>
