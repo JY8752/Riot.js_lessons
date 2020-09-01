@@ -39,11 +39,31 @@
         <div class="mdc-button__ripple"></div>
         <i class="material-icons material-icon-button__icon">add</i>
     </button>
+
+    <hr/>
+
+    <p>◯ Icons</p>
+    <icon >favorite</icon>
+    <icon >help_outline</icon>
+    <icon >book</icon>
+    <icon >mood</icon>
+    <icon >shopping_cart</icon>
+    <icon >print</icon>
+    <icon >schedule</icon>
+    <icon >thumb_up</icon>
+
+    <hr/>
+
+    <card/>
     <script>
         import Rmd from './components/rmd-button.riot'
+        import Icon from './components/rmd-icon.riot'
+        import Card from './components/rmd-card.riot'
         export default {
             components: {
-                Rmd
+                Rmd,
+                Icon,
+                Card
             },
             isLinked: false,
             onBeforeMount(props, state) {
