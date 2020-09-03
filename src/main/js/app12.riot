@@ -1,0 +1,53 @@
+<app12>
+    <h1>{ props.title }</h1>
+
+    <router base={base}>
+        <nav>
+            <a each={ page in pages } href="/{ page.id }">
+                { page.title }
+            </a>
+        </nav>
+    </router>
+
+    <script>
+        import { Route, Router } from '@riotjs/route'
+        export default {
+            components: {
+                Router,
+                Route
+            },
+            pages: [
+                { id: "", title: "Home", body: "Click the link above." },
+                { id: "sushi", title: "Sushi", body: "This is the 🍣 page." },
+                { id: "pizza", title: "Pizza", body: "This is the 🍕 page." }
+            ],
+            base: `${window.location.protocol}//${window.location.host}`,
+            onBeforeMount(props, state) {
+
+            }
+        }
+    </script>
+    <style>
+        :host {
+            display: block;
+            margin: 0;
+            padding: 1em;
+            text-align: center;
+            color: #666;
+        }
+        nav {
+            display: block;
+            border-bottom: 1px solid #666;
+            padding: 0 0 1em;
+            text-align: center;
+        }
+        nav > a {
+            display: inline-block;
+            padding: 0 .8em;
+        }
+        nav > a:not(:first-child) {
+            border-left: 1px solid #555;
+        }
+
+    </style>
+</app12>

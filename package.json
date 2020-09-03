@@ -9,6 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
+    "cleanup": "rm -rf .cache dist",
     "parcel": "parcel build src/main/js/main.js -d src/main/resources/static/js/output"
   },
   "repository": {
@@ -32,6 +33,7 @@
   "dependencies": {
     "@riotjs/compiler": "^4.10.1",
     "@riotjs/observable": "^4.0.4",
+    "@riotjs/route": "5.3.1",
     "animejs": "^3.2.0",
     "axios": "^0.20.0",
     "dotenv": "^8.2.0",
