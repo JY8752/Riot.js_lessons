@@ -1,0 +1,58 @@
+- state
+    - propsは変更不可
+    - カスタムコンポーネント内ではpropsの値はstateに格納しておくのがよい
+- DOMへのアクセス
+    - this.$ → 単体の要素へのアクセス
+    - this.$$ → 複数への要素へのアクセス
+- JavaScriptの使用
+    - {}にはJavaScriptの式などを使用可能
+- this.update()
+    - 処理の後に画面は自動で更新されないため上記メソッド必須
+- マウントのハンドリング
+    - ifディレクティブを使い、表示/非表示をハンドリングできる。
+    - 不要なラッパータグを増やさないため<template>があり、マウント時には削除される。
+- ループ
+    - <li each={ item in items }>{ item }</li>
+    → items配列をループ表示。*nameは予約語のため使用できないので注意！
+    →データ型、オブジェクトもループ可能。
+    - <li each={ (item, index) in items}>{ index } : { item }</li>
+    →インデックスも表示可能
+    - オブジェクトのループ
+        - Objectオブジェクトのentriesメソッド
+        →<p each={ item in Object.entries(items) }>
+                key: { item[0] } - value: { item[1] }
+            </p>
+        →entriesメソッドは[key, value]を格納した配列に変換している！
+    - キー属性
+        - ループするコレクションが不変の場合、キー属性を設定することでパフォーマンスが大幅に向上する。
+- コンポーネントのネスト
+    - 子コンポーネントに値や関数を渡したい場合、カスタムタグの属性に設定。
+    →<custom-tag name="name" value={value}/>
+    - 文字列中の変数の使用
+    →${props.name}
+    - 子コンポーネントはmountメソッドの呼び出しは不要
+    →scriptタグの記述だけで自動でマウントされる。
+- Scoped CSS
+    - コンポーネントに限定した全体の設定→:host {}
+- イベントハンドラ
+    - 子から親コンポーネントのイベントハンドラ
+    →observableライブラリの使用。
+        - observable()でインスタンスを作成
+        - on(イベント名, コールバック関数)でイベントを受信する
+        - trigger(イベント名, 値)でイベントを送信する
+- データの永続化
+    - 永続化の方法
+        ①DBを使う
+        ②firestoreを使う
+        ③webストレージを使う
+    - webストレージ
+        ①localStorage
+        ②sessionStorage
+    - localStorage
+        - window.localStorageで使用可能
+        - ストレージに保存するのはオブジェクトも可能だが、文字列のみ
+        →JSON.stringify(), JSON.parse()を使用して変換
+
+
+
+

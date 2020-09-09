@@ -1,0 +1,100 @@
+<app6>
+    <div class="app-header">
+        <div class="header-left">
+            <img src="https://riot.js.org/img/logo/square.svg" alt="Riot.js logo" class="logo">
+        </div>
+    </div>
+    <div class="header-right">
+        <h1>{ props.title }</h1>
+    </div>
+
+    <p>Animated</p>
+    <button class="ui animated button basic violet">
+        <div class="visible content">Next</div>
+        <div class="hidden content">
+            <i class="right arrow icon" />
+        </div>
+    </button>
+    <button class="ui vertical animated button teal">
+        <div class="visible content">Shop</div>
+        <div class="hidden content">
+            <i class="shop icon" />
+        </div>
+    </button>
+    <button class="ui animated fade button secondary">
+        <div class="visible content">Sign-up for a Pro account</div>
+        <div class="hidden content">
+            $12.99 a month
+        </div>
+    </button>
+
+    <hr/>
+
+    <p>Labeled</p>
+    <div class="ui labeled button">
+        <button class="ui red button">
+            <i class="heart icon"></i>Like
+        </button>
+        <a class="ui basic red left pointing label">
+            2,048
+        </a>
+    </div>
+    <div class="ui left labeled button">
+        <a class="ui basic label">
+            2,048
+        </a>
+        <button class="ui icon  button blue">
+            <i class="fork icon"></i>Like
+        </button>
+    </div>
+    <button class="ui labeled icon button">
+        <i class="pause icon"></i>
+        Pause
+    </button>
+
+    <hr/>
+
+    <p>Group</p>
+    <div class="ui icon buttons">
+        <button class="ui button"><i class="align left icon"></i></button>
+        <button class="ui button"><i class="align center icon"></i></button>
+        <button class="ui button"><i class="align right icon"></i></button>
+        <button class="ui button"><i class="align justify icon"></i></button>
+    </div>
+
+    <hr/>
+
+    <p>Status</p>
+    <button class="ui active button">
+        <i class="user icon"></i>
+        Follow
+    </button>
+    <button class="ui disabled button">
+        <i class="user icon"></i>
+        Followed
+    </button>
+    <button class="ui primary loading button">Loading</button>
+    <button class="ui secondary loading basic button">Loading</button>
+    <button
+        class="ui toggle button { isActive && 'active' }"
+        onclick={ handleToggle }
+    >Vote</button>
+    <button class="fluid ui button" style="margin-top: 10px;">Fits container</button>
+    
+    <script>
+        export default {
+            isActive: false,
+            onBeforeMount() {
+            },
+            handleToggle(e) {
+                this.isActive = !this.isActive
+                this.update()
+            }
+        }
+    </script>
+    <style>
+        :host {
+            padding: 2rem;
+        }
+    </style>
+</app6>

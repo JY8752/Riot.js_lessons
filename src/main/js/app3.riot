@@ -1,0 +1,55 @@
+<app3>
+    <div class="app-header">
+        <div class="header-left">
+            <img src="https://riot.js.org/img/logo/square.svg" alt="Riot.js logo" class="logo">
+        </div>
+    </div>
+    <div class="header-right">
+        <h1>{ props.title }</h1>
+    </div>
+    <ul>
+        <li>
+            <su-checkbox>
+                Make my profile visible
+            </su-checkbox>
+        </li>
+        <li>
+            <su-checkbox class="disabled">
+                Disabled
+            </su-checkbox>
+        </li>
+        <li>
+            <su-checkbox class="slider">
+                Accept terms and conditions
+            </su-checkbox>
+        </li>
+        <li>
+            <su-checkbox 
+                class="toggle"
+                checked={ isChecked }
+                onchange={ handleChange }
+            >
+                Subscribe to weekly newsletter
+            </su-checkbox>
+        </li>
+    </ul>
+    <div class="ui message">
+        <p>{ isChecked ? 'on' : 'off' }</p>
+    </div>
+    <script>
+        export default {
+            isChecked: false,
+            onBeforeMount() {
+            },
+            handleChange(e) {
+                this.isChecked = e.target.checked
+                this.update()
+            }
+        }
+    </script>
+    <style>
+        :host {
+            padding: 2rem;
+        }
+    </style>
+</app3>

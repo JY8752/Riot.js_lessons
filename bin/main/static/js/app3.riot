@@ -1,0 +1,40 @@
+<app3>
+    <div class="app-header">
+        <img src="https://riot.js.org/img/logo/riot-logo.svg" alt="Riot.js logo" class="logo">
+    </div>
+    <h1>{ props.title }</h1>
+
+    <ul>
+        <li class="John">
+            Button John: <button-a observable={obs} />
+        </li>
+        <li class="Nancy">
+            Button Nancy: <button-b observable={obs} />
+        </li>
+    </ul>
+
+    <script>
+        export default {
+            onBeforeMount(props, state) {
+                this.obs = observable(this)
+                this.obs.on('*', (name, val) => {
+                    this.$( `li.${val}` ).style.color = "#ED1846";
+                    setTimeout(() => {
+                        this.$( `li.${val}` ).style.color = "black";
+                    }, 500);
+                })
+            }
+        }
+    </script>
+    <style>
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            list-style: none;
+        }
+        li:last-child {
+            margin-top: 20px;
+        }
+    </style>
+</app3>

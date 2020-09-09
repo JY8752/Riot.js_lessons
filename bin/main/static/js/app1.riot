@@ -1,0 +1,22 @@
+<app1>
+    <app-menu items={ menus }/>
+    <app-hero title={ props.heroTitle }/>
+    <app-links items={ urls } />
+    <app-footer text={ props.footerText}/>
+
+    <script>
+        export default {
+            menus: [
+                { title: 'menu1', url: '#' },
+                { title: 'menu2', url: '#' },
+                { title: 'menu3', url: '#' },
+            ],
+            urls: [
+                { title: 'GitHub', url: '#'},
+                { title: 'Twitter', url: '#'},
+                { title: 'Facebook', url: '#'},
+
+            ]
+        }
+    </script>
+</app1>
