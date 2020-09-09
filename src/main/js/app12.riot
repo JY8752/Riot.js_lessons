@@ -1,29 +1,54 @@
 <app12>
-    <h1>{ props.title }</h1>
-
+    <h1>{props.title}</h1>
     <router base={base}>
         <nav>
             <a each={ page in pages } href="/{ page.id }">
                 { page.title }
             </a>
         </nav>
+
+        <route path="/:page">
+            <Food
+                title={ getPageById(route).title }
+                body={ getPageById(route).body }
+                color='#ffcc99'
+            />
+        </route>
+        <route path="/:page/:detail">
+            <Food
+                title={ getPageById(route).title }
+                body={ getPageById(route).body }
+                color='#ccffff'
+            />
+        </route>
+        <route path="">
+            <Home title={ pages[0].title } body={ pages[0].body } />
+        </route>
     </router>
 
     <script>
         import { Route, Router } from '@riotjs/route'
+        import Home from './components/app-home.riot'
+        import Food from './components/app-food.riot'
         export default {
             components: {
                 Router,
-                Route
+                Route,
+                Home,
+                Food
             },
             pages: [
                 { id: "", title: "Home", body: "Click the link above." },
-                { id: "sushi", title: "Sushi", body: "This is the 🍣 page." },
+                { id: "sushi/yellowtail", title: "Sushi", body: "This is the 🍣 page." },
                 { id: "pizza", title: "Pizza", body: "This is the 🍕 page." }
             ],
             base: `${window.location.protocol}//${window.location.host}`,
             onBeforeMount(props, state) {
 
+            },
+            getPageById(route) {
+                const id = route.params.join('/')
+                return this.pages.find(page => page.id === id) || this.page[0]
             }
         }
     </script>
